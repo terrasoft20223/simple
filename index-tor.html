@@ -1,0 +1,31 @@
+<textarea id="request" style="width:800px; height: 200px;">select * from users</textarea>
+<br/>
+<button id="button">Send</button>
+<div id="response" style="width:800px; height: 200px; overflow: scroll;"></div>
+
+<script>
+document.getElementById('button').addEventListener('click', function(event) {
+    const request = document.getElementById('request').value
+    console.log(request)
+    //aaaText(request);
+    
+    
+    fetch('/reqreq', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({request: request})
+    })
+    .then(res => res.json())
+    .then(res => {
+        console.log(res.data)
+        document.getElementById('response').innerText = JSON.stringify(res.data);
+    });
+    
+    
+});
+
+//
+</script>
